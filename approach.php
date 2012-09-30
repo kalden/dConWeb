@@ -1,0 +1,71 @@
+<?php
+	include("components/environment.php");
+	include("components/menu.php");
+	include("components/sidemenu.php");
+	
+	PrintHeader("Consensus Approach");
+	
+	print '
+	  <table width="95%"  border="0" cellspacing="0" cellpadding="0">
+		<tr align="left">
+		  <td valign="top">';
+		  PrintSideMenuBox("Approach",GetSideMenuItems("Approach","Consensus Approach",null,null));
+		  print '
+		  </td>
+		  <td valign="top" align="left"><div id="textheading">Consensus Approach</div>
+		  <div id="textsubheading">Principles behind expert consensus.</div>
+	    <div id="textinfo">
+	      <p align="left"> Our approach to constructing a benchmarking dataset is to include  proteins for which experts for structure partitioning agree among themselves.  Structures for which no agreement on partitioning into domains can be reached are not included in such benchmark dataset. We realize that this approach is probably missing most complex and contentious protein structures for which there is no unique solution.  Our intention however is to focus on the structures for which single unambiguous solution of domain partitioning exists.  Evaluating automatic methods with such benchmark will highlight the area in which automatic methods are lagging behind human experts.</p>
+		  <p align="left">By our definition an expert consensus is reached when expert methods agree on the number of  assigned domains.  A more strict definition of consensus is where number of domain as well as domain boundaries are agreed upon by the experts. <a href="dataset.php">Benchmark_1A</a> and <a href="dataset.php">Benchmark_2</a> use consensus as defined by the number of domains.  <a href="dataset.php">Benchmark _3 </a> uses strict definition of consensus in which in addition to the number of domains there is 90% or better match  between positions of the corresponding domains. </p>
+		  <p align="left">The consensus is sought among three methods for domain assignments which involve human expertise as a part of the method:</p>
+      </div><br>
+	  <div id="textsubheading">Expert methods for domain assignment.</div>
+	  <div id="textinfo">
+	  <p align="left"><strong><a href="http://scop.mrc-lmb.cam.ac.uk/scop/">SCOP</a></strong>: a brain child of Alexei Murzun, this resource is provided by MRC Laboratory of Molecular Biology and Cambridge Center for Protein Engineering.   In the words if its authors " This database provides detailed and comprehensive description of the structural and evolutionary relationships of the proteins of known structure" .  SCOP has a hierarchical structure based on the level of similarity: CLASS, FOLD, SUPERFAMILIES and FAMILIES. SCOP is extremely  well-known and accepted resource, its classification used most frequently in the field of structural bioinformatics. [<a href="references_pdf/SCOP_paper_1995.pdf">Reference</a>]</p>
+<p align="left"><strong><a href="http://www.cathdb.info/latest/index.html">CATH</a></strong>:  a hierarchical classification resource provided by the group of Janet Thornton. Similarly to SCOP there four levels going from most general to more specific: CLASS is derived from secondary structure content, ARCHITECTURE describes the gross orientation of secondarity structures, without consideration of their connectivity, TOPOLOGY clusters structures with similar topological arrangement between corresponding secondary structures, finally HOMOLOGOUS superfamilies represent families of structures with similar sequence and function. CATH resource is a combination of several automatic methods, but involves supervision and curation by human experts in several of its steps. </p> 
+<p align="left"><strong>AUTHORS</strong>:  This terms is coined by us and it represents a collection of domain assignments by the authors of the solved structures compiled from the literature.  Two variations of this dataset exist.
+ <a href="http://www.bmm.icnet.uk/~domains/test/dom-rr.html">Authors_1</a> was compiled  by <a href="references_pdf/AUTHORS_paper_1995.pdf">Islam et al.</a> was used to construct Benchmark_1 [<a href="references_pdf/Veretnik_domain_paper_2003.pdf">Reference</a>]
+Authors_2 was compiled by us and is used to construct  Benchmark_2 and Benchmark_3 [<a href="references_pdf/Holland_domain_paper_2005.pdf">Reference</a>]</p>
+	  </div><br>
+	  <div id="textsubheading">Why experts do not agree on domain assignments.</div>
+	  <div id="textinfo">
+	  <p align="left">
+	  Differences among experts\' methods result from conceptually different approaches to domain definition taken by different human experts. AUTHORS method, while the most diverse due to multiplicity of experts involved, exhibits a strong tendency toward identifying small functional regions as domains. This approach results in some domains that are structurally unstable or inseparable from the rest of the structure. SCOP partitions structure only to the largest recurring unit, which often can be, but is not, separated further into smaller structurally independent domains. CATH attempts to balance structural, evolutionary and functional constraints, producing the least number of conflicting assignments. 
+	  </p>
+	  </div><br>
+	  <div id="textsubheading"><a name="disagree examples_all">Cases of disagreement among expert assignments. </a></div>
+		  <div id="textinfo">
+          <p><a name="AUTHORS"><strong>Domain misassignments by AUTHORS method. </strong></a></p>
+          <p><strong>AUTHORS </strong> assignment represents the least consistent dataset, since assignments are done by many individuals with varying opinions on structural domain definitions. When AUTHORS disagree with other expert methods, the tendency of AUTHORS assignments is to partition a relatively compact substructure into two domains. Such partitioning contradicts the basic concepts of structural domains, as the partitioning disturbs many contacts between secondary structures ( <strong><em>1mat </em></strong> Figure 1A, <strong><em>1lga </em></strong> Figure 1B, <strong><em>1tahb </em></strong> Figure 1C). Often the extra domains are also quite small (in addition to being in close proximity to the main body of the domain), thus again, assignment of such domains contradicts the basic principles of structural domains as compact and semi-independent units ( <strong><em>1iag </em></strong> Figure 1D, <strong><em>1l92 </em></strong> Figure 1E, <strong><em>1tahb </em></strong> Figure 1C, <strong><em>1chra </em></strong> Figure 1G, <strong><em>1cpca/cpcl </em></strong> Figure 1H, <strong><em>1pxta </em></strong> figure 1I, <strong><em>3gly </em></strong> Figure 1J). There is only one case for which AUTHORS assign less domains than other expert methods and in this case the assignment is most likely wrong ( <strong><em>1hfh </em></strong>, Figure 1K), since the structure has two clear lobes. Some of the cases where AUTHORS disagree with other expert methods appear quite plausible ( <strong><em>1caub </em></strong> Figure 1L, <strong><em>2hpda </em></strong> Figure 1M, <strong><em>1ppn </em></strong>, Figure 1N). </p>
+
+          <p><strong>Domain boundaries </strong>: none, since AUTHORS is a reference method for calculation of domain boundaries. </p>
+          <p><img src="resources/FIgure1_expert_methods.jpg" width="922" height="583"></p>
+          <p><strong>Figure 1.&nbsp; Examples of probable misassignment of domains by AUTHORS. </strong></p>
+          <p><a name="SCOP"><strong>Domain misassignments by SCOP method. </strong></a></p>
+          <p><strong>SCOP </strong>usually leaves large structures uncut, while other experts cut it into two or more domains. The structures that are not separated by SCOP frequently are large and consist of two or more a/b domains (Figure 11R-MM). In the majority of cases the domains are clearly spatially distinct and while SCOP keeps them together, the additional annotation in the individual entries in SCOP often mentions the presence of multiple domains within the ?official\' SCOP domain. The annotation is descriptive and does not provide boundaries, but conceptually it usually agrees with the assignments of other experts. Thus, while SCOP recognizes independent structural units comprising a domain, it intentionally keeps them together to represent a recurrent fold. Some structures which SCOP does not partition, or partitions insufficiently, are difficult case. Cutting the structure results in the separation of closely packed domains with a complex interface ( <strong><em>1gal </em></strong>, <strong><em>1gbh </em></strong>, Figure 11EE, 11II), appearance of non-compact domains ( <strong><em>1ahva </em></strong>, <strong><em>2cts </em></strong>, Figure 9JJ, KK), or domains with little secondary structure ( <strong><em>2snv </em></strong>, <strong><em>1hmy </em></strong>, Figure 11DD, 11MM). </p>
+
+          <p><img src="resources/figure2A_expert_methods.jpg" width="872" height="722"></p>
+          <p><img src="resources/figure2B_expert_methds.jpg" width="1017" height="794"></p>
+          <p><strong>Figure 2.&nbsp; Examples of probable misassignments of domains by SCOP method.&nbsp; </strong>Number of domains assigned by SCOP and other methods is indicated by each structure.&nbsp; 5 methods represent all other tested methods: AUTHORS, CATH, DALI, DomainParser and PDP. </p>
+          <p><strong>Domain boundaries </strong>: SCOP has the lowest number of disagreements regarding placement of domain boundaries among all the methods compared. When SCOP assigns the number of domains correctly, it also assigns the boundaries correctly. Only in one case does SCOP leave unassigned a part of the single domain chain, agreeing with PDP and DomainParser ( <strong><em>1d66a </em></strong>, Figure 3A). When the number of fragments differs, it is usually because SCOP assigns fewer fragments and as a result the partitioning of the domains is less than optimal ( <strong><em>3mdda </em></strong>, Figure 3B). Finally, there is a case for which SCOP (along with PDP and DALI methods) splits continuous domain (in the reference method) into fragments in order to achieve compactness of the resulting domains ( <strong><em>4gpd1 </em></strong>, Figure 3C). </p>
+
+          <p><img src="resources/figure3_expert_methods.jpg" width="846" height="198"></p>
+          <p><strong>Figure 3.&nbsp; Examples of problematic domain boundaries assigned by SCOP method. </strong>Arrows indicate differences in domain boundaries. &nbsp; Unassigned region in 1d66 is black. </p>
+          <p><a name="CATH"><strong>Domain misassignments by CATH method. </strong></a></p>
+          <p><strong>CATH </strong>method appears in this analysis as the most reasonable, agreeing with one of the two remaining expert assignments (and usually siding with a more intuitive partitioning of the chain). CATH rarely disagrees with both expert methods and in those cases one or two algorithmic assignments side with CATH (the exception is <strong><em>1lla </em></strong>, where CATH disagrees with all the algorithmic assignments). There are a total of 8 chains for which CATH dissents from both AUTHORS and SCOP (Figure 4). These cases are intriguing because they are the chains for which methods with opposing tendencies (AUTHORS and SCOP) agree while CATH disagrees. Chains in this category are either all- a or a/b , mostly consisting of a -helices. We do not detect an obvious preference on the part of CATH to overcut or to undercut: in three cases CATH splits the a -structure into 2 domains ( <strong><em>1prcl </em></strong>, <strong><em>2hhm </em></strong>, <strong><em>3mdda </em></strong>, Figure 4A, 4C, 4G), while the other two expert methods keep it intact. In another case it does not split the a -structure when other experts do ( <strong><em>1lla </em></strong>, Figure 5H). In two cases CATH split the a/b structure into two domains (other experts keep it as one domain; <strong><em>2hhm </em></strong>, <strong><em>1gky </em></strong>, Figure 4C, 4D). Yet in two other cases CATH keeps the chain intact, while other experts divide it into 2 domains ( <strong><em>1esl </em></strong>, <strong><em>1dsba </em></strong>, Figure 4E, 4F). We observe that in both cases of multi-domain chains, when alternative assignments produce 2- or 3-domain chains, the additional domain evolves from one fragment of a discontinuous domain ( <strong><em>3mdda </em></strong>, <strong><em>1lla </em></strong> Figure 4G, 4H). Most of the above assignments are not clear-cut and may point to another genuine problem in domain definition- difficulty deciding what to do with large all- a or mostly- a structures. </p>
+
+          <p><img src="resources/figure5_expert_methods.jpg" width="1000" height="489"></p>
+          <p><strong>Figure 4. Examples of probable misassignments of domains by CATH method. </strong>Number of domains assigned by CATH and other methods is indicated by each structure.&nbsp; </p>
+          <p><strong>Domain boundaries: </strong> CATH disagrees with AUTHORS on the placement of boundaries in 24 cases at the stringency level of 95% and in 5 cases at the stringency level of 80%. CATH tends to produce more fragments per domain than AUTHORS. There is only one case of the single domain chain for which CATH agrees with PDP and DALI and leaves 30% of the chain, comprising several small helices, unassigned ( <strong><em>2pf2 </em></strong>, Figure 5A). In this particular case SCOP gives the unassigned region the status of a separate domain. Some of the misassignments by CATH involve different positioning of the boundary within the loop region ( <strong><em>4rcrh </em></strong>, Figure 5C); however, several methods differ in boundary placement in this particular case. In the case of <strong><em>4gph </em></strong> (Figure 5B), CATH introduces several additional fragments within each of two domains to accommodate correct assignment of loops that cross multiple times between the two main domains. </p>
+
+          <p><img src="resources/figure_5_correct_expert_methods.jpg" width="962" height="216"></p>
+          <p><strong>Figure 5.&nbsp; Examples of problematic domain boundaries assigned by CATH method. </strong>Arrows indicate differences in domain boundaries. &nbsp; Unassigned region in 2pf2 is grey. </p>
+          <p>&nbsp;</p>
+        </div>
+	  </td>
+		</tr>
+	  </table>';
+	
+	
+	PrintFooter();
+?>
